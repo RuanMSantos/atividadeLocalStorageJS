@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocalStore</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 <body>
-    <form id="formulario">
-        <h2>Cadastro aluno</h2>
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite seu nome...">
-        <label for="curso">Curso</label>
-        <input type="text" name="curso" id="curso" placeholder="Digite seu curso...">
-        <label for="ano">Ano de conclusão</label>
-        <input type="number" name="ano" id="ano" placeholder="Digite o ano de conclusão...">
-        <div id="btn">
-            <button type="submit" id="btn_cadastrar">Cadastrar</button>
-            <button id="btn_pesquisar">Pesquisar</button>
-            <button id="btn_exibir">Exibir</button>
-            <button id="btn_atualizar">Atualizar</button>
-            <button id="btn_remover">Remover</button>
-            <button id="btn_limpar">Limpar</button>
-        </div>
-    </form>
+        <form id="formulario">
+            <i id="icon" class='bx bx-user'></i>
+            <h2>Cadastro de aluno</h2>
+            <label for="nome">MOME:</label>
+            <input type="text" name="nome" id="nome" placeholder="Digite seu nome...">
+            <label for="curso">CURSO:</label>
+            <input type="text" name="curso" id="curso" placeholder="Digite seu curso...">
+            <label for="ano">CONCLUSÃO:</label>
+            <input type="number" name="ano" id="ano" placeholder="Digite o ano de conclusão...">
+            <div id="btn">
+                <button type="submit" id="btn_cadastrar">Cadastrar</button>
+                <button id="btn_pesquisar">Pesquisar</button>
+                <button id="btn_exibir">Exibir</button>
+                <button id="btn_atualizar">Atualizar</button>
+                <button id="btn_remover">Remover</button>
+                <button id="btn_limpar">Limpar</button>
+            </div>
+        </form>
+
     <div id="result">
         <h1></h1>
         <p id="resultado"></p>

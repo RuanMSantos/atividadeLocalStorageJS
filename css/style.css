@@ -6,20 +6,50 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
+    background: url('/img/background.jpg') center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    
 }
 
+
+
 #formulario {
+
+    color: white;
+    padding: 30px 80px;
+    border-radius: 5px;
+    border: 2px solid  rgba(255, 255, 255, .2);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
     flex-flow: column;
-    margin-top: 20vh;
+    margin-top: 15vh;
     display: flex;
-    width: 300px;
-    gap: 5px;
+    width:465px;
+    gap: 7px;
+    background: transparent;
+    backdrop-filter: blur(40px);
+
 }
+
+label{
+    margin-left: 10px;
+    
+}
+
+#icon{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    color: white;
+}
+
 
 form > input {
     border: 1px solid black;
-    border-radius: 10px;
-    padding: 6px;
+    border-radius: 50px;
+    padding: 10px;
 }
 
 form > label {
@@ -32,38 +62,56 @@ form > h2 {
 }
 
 #btn > *{
+    color: white;
     border: 1px solid black;
     transition: all 0.5s;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 15px;
     margin-top: 6px;
-    padding: 4px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: gray;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
 }
 
 #btn > *:hover {
-    background-color: gray;
+    background-color: rgb(9, 155, 58);
 }
 
 #result {
     flex-flow: column;
     min-width: 500px;
     display: flex;
+    color: white;
 }
 
 #result > button {
-    
+    outline: none;
+    border: none;
     border: 1px solid black;
     transition: all 0.5s;
     border-radius: 6px;
     font-size: 20px;
+    background-color: gray;
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
 }
 
 #result > button:hover {
-    background-color: gray;
+    background-color: rgb(250, 64, 64);
+    color: white;
 }
 
 #result > p {
-    font-size: 30px;
+    color: white;
+    font-size: 20px;
+    border: 1px solid none;
+    padding:10px ;
+    border-radius: 5px;
+    backdrop-filter: blur(40px);
+    backdrop-filter: brightness(50%);
 }
 
 #result > h1 {
