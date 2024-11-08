@@ -14,6 +14,14 @@ let alunos = [];
 const cadastrar = (e) => {
     e.preventDefault();
     
+    if(document.getElementById('nome').value == ""
+        || document.getElementById('curso').value == ""
+        || document.getElementById('ano').value == ""
+){
+        limparCampos();
+        return;
+    }
+
     let aluno = {
         nome: document.getElementById('nome').value,
         curso: document.getElementById('curso').value,
@@ -31,6 +39,13 @@ const limparCampos = () => {
     document.getElementById('curso').value = "";
     document.getElementById('ano').value = "";
 };
+
+const limparCamposAtualizar = () => {
+    document.getElementById('nome_div').value = "";
+    document.getElementById('nome_atualizado').value = "";
+    document.getElementById('curso_div').value = "";
+    document.getElementById('ano_div').value = "";
+}
 
 const pesquisar = (e) => {
     e.preventDefault();
@@ -65,6 +80,15 @@ const exibir = (e) => {
 const atualizar = (e) => {
     e.preventDefault();
 
+    if(document.getElementById('nome_div').value == ""
+    || document.getElementById('nome_atualizado').value == ""
+    || document.getElementById('curso_div').value == ""
+    || document.getElementById('ano_div').value == ""
+){
+    limparCamposAtualizar();
+    return;
+}
+
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
     const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome_div').value);
@@ -73,8 +97,11 @@ const atualizar = (e) => {
     arrayAlunos[indice].curso = document.getElementById('curso_div').value;
     arrayAlunos[indice].ano = document.getElementById('ano_div').value;
 
-    localStorage.setItem("alunos", JSON.stringify(arrayAlunos));
-    limparCampos();
+    alunos = arrayAlunos;
+
+    localStorage.setItem("alunos", JSON.stringify(alunos));
+    
+    limparCamposAtualizar();
 };
 
 const remover = (e) => {
@@ -117,6 +144,7 @@ const avancar = ()=> {
 };
 
 const voltarFormulario = () => {
+    limparCamposAtualizar();
     formulario.style.display = 'flex';
     divAtualizar.style.display = 'none';
 };
