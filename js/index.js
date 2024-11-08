@@ -1,11 +1,14 @@
 const formulario = document.getElementById('formulario');
 const divResult = document.getElementById('result');
+const divAtualizar = document.getElementById('atualizar');
 const btnPesquisar = document.getElementById('btn_pesquisar');
 const btnExibir = document.getElementById('btn_exibir');
 const btnAtualizar = document.getElementById('btn_atualizar');
 const btnRemover = document.getElementById('btn_remover');
 const btnLimpar = document.getElementById('btn_limpar');
 const btnVoltar = document.getElementById('btn_voltar');
+const btnAtualizarDiv = document.getElementById('btn_atualizar_div');
+const btnVoltarAtualizar = document.getElementById('btn_voltar_atualizar');
 let alunos = [];
 
 const cadastrar = (e) => {
@@ -64,11 +67,11 @@ const atualizar = (e) => {
 
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
-    const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome').value);
+    const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome_div').value);
 
-    arrayAlunos[indice].nome = document.getElementById('nome').value;
-    arrayAlunos[indice].curso = document.getElementById('curso').value;
-    arrayAlunos[indice].ano = document.getElementById('ano').value;
+    arrayAlunos[indice].nome = document.getElementById('nome_atualizado').value;
+    arrayAlunos[indice].curso = document.getElementById('curso_div').value;
+    arrayAlunos[indice].ano = document.getElementById('ano_div').value;
 
     localStorage.setItem("alunos", JSON.stringify(arrayAlunos));
     limparCampos();
@@ -77,13 +80,18 @@ const atualizar = (e) => {
 const remover = (e) => {
     e.preventDefault();
 
+    if(document.getElementById('nome').value == null || document.getElementById('nome').value == ""){
+        return;
+    }
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
     const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome').value);
 
     arrayAlunos.splice(indice, 1);
 
-    localStorage.setItem("alunos", JSON.stringify(arrayAlunos));
+    alunos = arrayAlunos;
+
+    localStorage.setItem("alunos", JSON.stringify(alunos));
     limparCampos();
 };
 
@@ -101,17 +109,29 @@ const voltar = (e) => {
 
     formulario.style.display = 'flex';
     divResult.style.display = 'none';
-}
+};
+
+const avancar = ()=> {
+    formulario.style.display = 'none';
+    divAtualizar.style.display = 'flex';
+};
+
+const voltarFormulario = () => {
+    formulario.style.display = 'flex';
+    divAtualizar.style.display = 'none';
+};
 
 const iniciar = () => {
     divResult.style.display = 'none';
     formulario.addEventListener('submit', cadastrar);
     btnPesquisar.addEventListener('click', pesquisar);
     btnExibir.addEventListener('click', exibir);
-    btnAtualizar.addEventListener('click', atualizar);
+    btnAtualizar.addEventListener('click', avancar);
     btnRemover.addEventListener('click', remover);
     btnLimpar.addEventListener('click', limpar);
     btnVoltar.addEventListener('click', voltar);
+    btnAtualizarDiv.addEventListener('click', atualizar);
+    btnVoltarAtualizar.addEventListener('click', voltarFormulario);
 };
 
 document.addEventListener('DOMContentLoaded', iniciar);

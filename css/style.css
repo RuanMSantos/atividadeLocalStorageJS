@@ -117,3 +117,20 @@ form > h2 {
 #result > h1 {
     text-align: center;
 }
+
+#atualizar {
+    
+    color: white;
+    padding: 30px 80px;
+    border-radius: 5px;
+    border: 2px solid  rgba(255, 255, 255, .2);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
+    flex-flow: column;
+    margin-top: 15vh;
+    display: none;
+    width:465px;
+    gap: 7px;
+    background: transparent;
+    backdrop-filter: blur(40px);
+
+}
