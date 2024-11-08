@@ -134,3 +134,11 @@ form > h2 {
     backdrop-filter: blur(40px);
 
 }
+
+.erro {
+    color: red;
+}
+
+.erro:focus {
+    box-shadow: 0px 0px 0px 3px red;
+}
