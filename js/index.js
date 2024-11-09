@@ -1,6 +1,7 @@
 const formulario = document.getElementById('formulario');
 const divResult = document.getElementById('result');
 const divAtualizar = document.getElementById('atualizar');
+
 const btnPesquisar = document.getElementById('btn_pesquisar');
 const btnExibir = document.getElementById('btn_exibir');
 const btnAtualizar = document.getElementById('btn_atualizar');
@@ -9,12 +10,21 @@ const btnLimpar = document.getElementById('btn_limpar');
 const btnVoltar = document.getElementById('btn_voltar');
 const btnAtualizarDiv = document.getElementById('btn_atualizar_div');
 const btnVoltarAtualizar = document.getElementById('btn_voltar_atualizar');
+
 const nome = document.getElementById('nome');
 const curso = document.getElementById('curso');
 const ano = document.getElementById('ano');
+const nomeDiv = document.getElementById('nome_div');
+const nomeAtualizado = document.getElementById('nome_atualizado');
+const cursoDiv = document.getElementById('curso_div');
+const anoDiv = document.getElementById('ano_div');
+
 const labelNome = document.getElementById('label_nome');
 const labelCurso = document.getElementById('label_curso');
 const labelAno = document.getElementById('label_ano');
+
+const pResultado = document.getElementById('resultado');
+
 let verificadorCheck = false;
 let alunos = [];
 
@@ -28,9 +38,9 @@ const cadastrar = (e) => {
     }
 
     let aluno = {
-        nome: document.getElementById('nome').value,
-        curso: document.getElementById('curso').value,
-        ano: document.getElementById('ano').value,
+        nome: nome.value,
+        curso: curso.value,
+        ano: ano.value,
     };
     alunos.push(aluno);
 
@@ -40,37 +50,37 @@ const cadastrar = (e) => {
 };
 
 const limparCampos = () => {
-    document.getElementById('nome').value = "";
-    document.getElementById('curso').value = "";
-    document.getElementById('ano').value = "";
+    nome.value = "";
+    curso.value = "";
+    ano.value = "";
 };
 
 const limparCamposAtualizar = () => {
-    document.getElementById('nome_div').value = "";
-    document.getElementById('nome_atualizado').value = "";
-    document.getElementById('curso_div').value = "";
-    document.getElementById('ano_div').value = "";
+    nomeDiv.value = "";
+    nomeAtualizado.value = "";
+    cursoDiv.value = "";
+    anoDiv.value = "";
 }
 
 const pesquisar = (e) => {
     e.preventDefault();
 
-    document.getElementById('result').children[0].innerHTML = "Aluno";
+    divResult.children[0].innerHTML = "Aluno";
     formulario.style.display = 'none';
     divResult.style.display = 'flex';
 
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
     
-    const result = arrayAlunos.find(arrayAlunos => arrayAlunos.nome == document.getElementById('nome').value);
+    const result = arrayAlunos.find(a => a.nome == nome.value);
 
-    document.getElementById('resultado').innerHTML = result.nome + ' - ' + result.curso + ' - ' + result.ano;
+    pResultado.innerHTML = result.nome + ' - ' + result.curso + ' - ' + result.ano;
     limparCampos();
 };
 
 const exibir = (e) => {
     e.preventDefault();
 
-    document.getElementById('result').children[0].innerHTML = "Lista de alunos";
+    divResult.children[0].innerHTML = "Lista de alunos";
     formulario.style.display = 'none';
     divResult.style.display = 'flex';
 
@@ -79,28 +89,24 @@ const exibir = (e) => {
 
     arrayAlunos.forEach(a => joinAlunos += (a.nome + ' - ' + a.curso + ' - ' + a.ano + '<br>'));
 
-    document.getElementById('resultado').innerHTML = joinAlunos;
+    pResultado.innerHTML = joinAlunos;
 };
 
 const atualizar = (e) => {
     e.preventDefault();
 
-    if(document.getElementById('nome_div').value == ""
-    || document.getElementById('nome_atualizado').value == ""
-    || document.getElementById('curso_div').value == ""
-    || document.getElementById('ano_div').value == ""
-){
+    if(nomeDiv.value == "" || nomeAtualizado.value == "" || cursoDiv.value == "" || anoDiv.value == ""){
     limparCamposAtualizar();
     return;
 }
 
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
-    const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome_div').value);
+    const indice = arrayAlunos.findIndex(a => a.nome == nomeDiv.value);
 
-    arrayAlunos[indice].nome = document.getElementById('nome_atualizado').value;
-    arrayAlunos[indice].curso = document.getElementById('curso_div').value;
-    arrayAlunos[indice].ano = document.getElementById('ano_div').value;
+    arrayAlunos[indice].nome = nomeAtualizado.value;
+    arrayAlunos[indice].curso = cursoDiv.value;
+    arrayAlunos[indice].ano = anoDiv.value;
 
     alunos = arrayAlunos;
 
@@ -112,12 +118,12 @@ const atualizar = (e) => {
 const remover = (e) => {
     e.preventDefault();
 
-    if(document.getElementById('nome').value == null || document.getElementById('nome').value == ""){
+    if(nome.value == null || nome.value == ""){
         return;
     }
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
-    const indice = arrayAlunos.findIndex(a => a.nome == document.getElementById('nome').value);
+    const indice = arrayAlunos.findIndex(a => a.nome == nome.value);
 
     arrayAlunos.splice(indice, 1);
 
@@ -137,8 +143,8 @@ const limpar = (e) => {
 const voltar = (e) => {
     e.preventDefault();
 
-    document.getElementById('resultado').innerHTML = "";
-    document.getElementById('result').children[0].innerHTML = "";
+    pResultado.innerHTML = "";
+    divResult.children[0].innerHTML = "";
 
     formulario.style.display = 'flex';
     divResult.style.display = 'none';
@@ -172,7 +178,7 @@ const check = () => {
         return;
     }
 
-    if (ano.value.trim().length != 4 || ano.value.trim() < 1900 || ano.value.trim() > 2100){
+    if (ano.value.length != 4 || ano.value < 1900 || ano.value > 2100){
         verificadorCheck = true;
         labelAno.classList.add('erro');
         ano.classList.add('erro');
@@ -188,6 +194,7 @@ const limparErro = (e) =>{
 
 const iniciar = () => {
     divResult.style.display = 'none';
+    divAtualizar.style.display = 'none';
     formulario.addEventListener('submit', cadastrar);
     formulario.querySelectorAll('input').forEach(i => i.addEventListener('input', limparErro));
     btnPesquisar.addEventListener('click', pesquisar);
