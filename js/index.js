@@ -9,16 +9,21 @@ const btnLimpar = document.getElementById('btn_limpar');
 const btnVoltar = document.getElementById('btn_voltar');
 const btnAtualizarDiv = document.getElementById('btn_atualizar_div');
 const btnVoltarAtualizar = document.getElementById('btn_voltar_atualizar');
+const nome = document.getElementById('nome');
+const curso = document.getElementById('curso');
+const ano = document.getElementById('ano');
+const labelNome = document.getElementById('label_nome');
+const labelCurso = document.getElementById('label_curso');
+const labelAno = document.getElementById('label_ano');
+let verificadorCheck = false;
 let alunos = [];
 
 const cadastrar = (e) => {
     e.preventDefault();
     
-    if(document.getElementById('nome').value == ""
-        || document.getElementById('curso').value == ""
-        || document.getElementById('ano').value == ""
-){
-        limparCampos();
+    check();
+    if (verificadorCheck == true){
+        verificadorCheck = false;
         return;
     }
 
@@ -126,6 +131,7 @@ const limpar = (e) => {
     e.preventDefault();
 
     localStorage.clear();
+    alunos = [];
 };
 
 const voltar = (e) => {
@@ -149,9 +155,41 @@ const voltarFormulario = () => {
     divAtualizar.style.display = 'none';
 };
 
+const check = () => {
+    if (nome.value.trim().length == 0){
+        verificadorCheck = true;
+        labelNome.classList.add('erro');
+        nome.classList.add('erro');
+        nome.focus();
+        return;
+    }
+
+    if (curso.value.trim().length == 0){
+        verificadorCheck = true;
+        labelCurso.classList.add('erro');
+        curso.classList.add('erro');
+        curso.focus();
+        return;
+    }
+
+    if (ano.value.trim().length != 4 || ano.value.trim() < 1900 || ano.value.trim() > 2100){
+        verificadorCheck = true;
+        labelAno.classList.add('erro');
+        ano.classList.add('erro');
+        ano.focus();
+        return;
+    }
+};
+
+const limparErro = (e) =>{
+    e.currentTarget.classList.remove('erro');
+    formulario.querySelectorAll('label').forEach(l => l.classList.remove('erro'));
+} 
+
 const iniciar = () => {
     divResult.style.display = 'none';
     formulario.addEventListener('submit', cadastrar);
+    formulario.querySelectorAll('input').forEach(i => i.addEventListener('input', limparErro));
     btnPesquisar.addEventListener('click', pesquisar);
     btnExibir.addEventListener('click', exibir);
     btnAtualizar.addEventListener('click', avancar);
