@@ -22,15 +22,25 @@ const anoDiv = document.getElementById('ano_div');
 const labelNome = document.getElementById('label_nome');
 const labelCurso = document.getElementById('label_curso');
 const labelAno = document.getElementById('label_ano');
+const labelNomeDiv = document.getElementById('label_nome_div');
+const labelNomeAtualizado = document.getElementById('label_nome_atualizado');
+const labelCursoDiv = document.getElementById('label_curso_div');
+const labelAnoDiv = document.getElementById('label_ano_div');
 
 const pResultado = document.getElementById('resultado');
 
 let verificadorCheck = false;
+let verificadorAtualizarPressionado = false;
 let alunos = [];
 
 const cadastrar = (e) => {
     e.preventDefault();
-    
+
+    if (verificadorAtualizarPressionado || verificadorAtualizarPressionado == 1){
+        verificadorAtualizarPressionado = false;
+        return;
+    }
+
     check();
     if (verificadorCheck == true){
         verificadorCheck = false;
@@ -65,13 +75,37 @@ const limparCamposAtualizar = () => {
 const pesquisar = (e) => {
     e.preventDefault();
 
+    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
+    
+    if (!arrayAlunos || !arrayAlunos[0]){
+        alert('Sem registros.');
+        limparCampos();
+        limparErro();
+        return;
+    }
+
+    if (nome.value.trim().length == 0){
+        verificadorCheck = true;
+        labelNome.classList.add('erro');
+        nome.classList.add('erro');
+        nome.focus();
+        return;
+    }
+    
+    const result = arrayAlunos.find(a => a.nome == nome.value);
+
+    if (!result){
+        verificadorCheck = true;
+        labelNome.classList.add('erro');
+        nome.classList.add('erro');
+        nome.focus();
+        return;
+    }
+
     divResult.children[0].innerHTML = "Aluno";
     formulario.style.display = 'none';
     divResult.style.display = 'flex';
 
-    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
-    
-    const result = arrayAlunos.find(a => a.nome == nome.value);
 
     pResultado.innerHTML = result.nome + ' - ' + result.curso + ' - ' + result.ano;
     limparCampos();
@@ -80,29 +114,68 @@ const pesquisar = (e) => {
 const exibir = (e) => {
     e.preventDefault();
 
+    let joinAlunos = "";
+    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
+
+    if (!arrayAlunos || !arrayAlunos[0]){
+        alert('Sem registros.');
+        limparCampos();
+        limparErro();
+        return;
+    }
+
+    arrayAlunos.forEach(a => joinAlunos += (a.nome + ' - ' + a.curso + ' - ' + a.ano + '<br>'));
+    
     divResult.children[0].innerHTML = "Lista de alunos";
     formulario.style.display = 'none';
     divResult.style.display = 'flex';
 
-    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
-    let joinAlunos = "";
-
-    arrayAlunos.forEach(a => joinAlunos += (a.nome + ' - ' + a.curso + ' - ' + a.ano + '<br>'));
 
     pResultado.innerHTML = joinAlunos;
+    limparCampos();
 };
 
 const atualizar = (e) => {
     e.preventDefault();
 
-    if(nomeDiv.value == "" || nomeAtualizado.value == "" || cursoDiv.value == "" || anoDiv.value == ""){
-    limparCamposAtualizar();
-    return;
-}
+    if (nomeDiv.value.trim().length == 0){
+        labelNomeDiv.classList.add('erro');
+        nomeDiv.classList.add('erro');
+        nomeDiv.focus();
+        return;
+    }
 
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
     const indice = arrayAlunos.findIndex(a => a.nome == nomeDiv.value);
+
+    if (indice == -1){
+        labelNomeDiv.classList.add('erro');
+        nomeDiv.classList.add('erro');
+        nomeDiv.focus();
+        return;
+    }
+
+    if (nomeAtualizado.value.trim().length == 0){
+        labelNomeAtualizado.classList.add('erro');
+        nomeAtualizado.classList.add('erro');
+        nomeAtualizado.focus();
+        return;
+    }
+
+    if (cursoDiv.value.trim().length == 0){
+        labelCursoDiv.classList.add('erro');
+        cursoDiv.classList.add('erro');
+        cursoDiv.focus();
+        return;
+    }
+
+    if (anoDiv.value.length != 4 || anoDiv.value < 1900 || anoDiv.value > 2100){
+        labelAnoDiv.classList.add('erro');
+        anoDiv.classList.add('erro');
+        anoDiv.focus();
+        return;
+    }
 
     arrayAlunos[indice].nome = nomeAtualizado.value;
     arrayAlunos[indice].curso = cursoDiv.value;
@@ -118,12 +191,32 @@ const atualizar = (e) => {
 const remover = (e) => {
     e.preventDefault();
 
-    if(nome.value == null || nome.value == ""){
-        return;
-    }
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
+    if (!arrayAlunos || !arrayAlunos[0]){
+        alert('Sem registros.');
+        limparCampos();
+        limparErro();
+        return;
+    }
+
+    if (nome.value.trim().length == 0){
+        verificadorCheck = true;
+        labelNome.classList.add('erro');
+        nome.classList.add('erro');
+        nome.focus();
+        return;
+    }
+
     const indice = arrayAlunos.findIndex(a => a.nome == nome.value);
+
+    if (indice == -1){
+        verificadorCheck = true;
+        labelNome.classList.add('erro');
+        nome.classList.add('erro');
+        nome.focus();
+        return;
+    }
 
     arrayAlunos.splice(indice, 1);
 
@@ -135,9 +228,25 @@ const remover = (e) => {
 
 const limpar = (e) => {
     e.preventDefault();
+    
+    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
+    
+    if (!arrayAlunos){
+        alert('Sem registros.');
+        limparCampos();
+        limparErro();
+        return;
+    }
+    
+    const validacao = confirm('Ao confirmar todos os dados serão excluídos!');
+    limparErro();
 
-    localStorage.clear();
-    alunos = [];
+    if (validacao){
+        limparCampos();
+        limparErro();
+        localStorage.clear();
+        alunos = [];
+    }
 };
 
 const voltar = (e) => {
@@ -150,12 +259,25 @@ const voltar = (e) => {
     divResult.style.display = 'none';
 };
 
-const avancar = ()=> {
+const avancar = () => {
+    verificadorAtualizarPressionado = true;
+
+    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
+
+    if (!arrayAlunos || !arrayAlunos[0]){
+        alert('Sem registros.');
+        limparCampos();
+        limparErro();
+        return;
+    }
+
     formulario.style.display = 'none';
     divAtualizar.style.display = 'flex';
+    limparCampos();
 };
 
 const voltarFormulario = () => {
+    verificadorAtualizarPressionado = false;
     limparCamposAtualizar();
     formulario.style.display = 'flex';
     divAtualizar.style.display = 'none';
@@ -187,16 +309,20 @@ const check = () => {
     }
 };
 
-const limparErro = (e) =>{
+const limparErroInput = (e) =>{
     e.currentTarget.classList.remove('erro');
-    formulario.querySelectorAll('label').forEach(l => l.classList.remove('erro'));
-} 
+    document.querySelector(`label[for=${e.currentTarget.name}]`).classList.remove('erro');
+}
+
+const limparErro = () => {
+    document.querySelectorAll('label,input').forEach(l => l.classList.remove('erro'));
+}
 
 const iniciar = () => {
     divResult.style.display = 'none';
     divAtualizar.style.display = 'none';
     formulario.addEventListener('submit', cadastrar);
-    formulario.querySelectorAll('input').forEach(i => i.addEventListener('input', limparErro));
+    document.querySelectorAll('input').forEach(i => i.addEventListener('input', limparErroInput));
     btnPesquisar.addEventListener('click', pesquisar);
     btnExibir.addEventListener('click', exibir);
     btnAtualizar.addEventListener('click', avancar);
