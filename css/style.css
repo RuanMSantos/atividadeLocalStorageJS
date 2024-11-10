@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
-    background: url('/img/background.jpg') center;
+    background: url('../img/background.jpg') center;
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
