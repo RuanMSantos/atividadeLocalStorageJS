@@ -87,6 +87,8 @@ const limparCamposAtualizar = () => {
 const pesquisar = (e) => {
     e.preventDefault();
 
+    limparErro();
+
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
     
     if (!arrayAlunos || !arrayAlunos[0]){
@@ -125,6 +127,8 @@ const pesquisar = (e) => {
 
 const exibir = (e) => {
     e.preventDefault();
+
+    limparErro();
 
     let joinAlunos = "";
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
@@ -261,6 +265,8 @@ const voltar = (e) => {
 
 const avancar = () => {
     verificadorAtualizarPressionado = true;
+
+    limparErro();
 
     const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
 
