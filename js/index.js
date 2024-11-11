@@ -47,6 +47,18 @@ const cadastrar = (e) => {
         return;
     }
 
+    const arrayAlunos = JSON.parse(localStorage.getItem("alunos"));
+    
+    if (arrayAlunos){
+        const result = arrayAlunos.find(a => a.nome == nome.value);
+
+        if (result){
+            alert('Esse aluno já foi cadastrado.');
+            limparCampos();
+            return;
+        }
+    }
+    
     let aluno = {
         nome: nome.value,
         curso: curso.value,
@@ -156,30 +168,18 @@ const atualizar = (e) => {
         return;
     }
 
-    if (nomeAtualizado.value.trim().length == 0){
-        labelNomeAtualizado.classList.add('erro');
-        nomeAtualizado.classList.add('erro');
-        nomeAtualizado.focus();
-        return;
+    if (nomeAtualizado.value.trim().length != 0){
+        arrayAlunos[indice].nome = nomeAtualizado.value;
     }
 
-    if (cursoDiv.value.trim().length == 0){
-        labelCursoDiv.classList.add('erro');
-        cursoDiv.classList.add('erro');
-        cursoDiv.focus();
-        return;
+    if (cursoDiv.value.trim().length != 0){
+        arrayAlunos[indice].curso = cursoDiv.value;
     }
 
-    if (anoDiv.value.length != 4 || anoDiv.value < 1900 || anoDiv.value > 2100){
-        labelAnoDiv.classList.add('erro');
-        anoDiv.classList.add('erro');
-        anoDiv.focus();
-        return;
-    }
+    if (anoDiv.value.length == 4 && anoDiv.value >= 1900 && anoDiv.value <= 2100){
+        arrayAlunos[indice].ano = anoDiv.value;
 
-    arrayAlunos[indice].nome = nomeAtualizado.value;
-    arrayAlunos[indice].curso = cursoDiv.value;
-    arrayAlunos[indice].ano = anoDiv.value;
+    }
 
     alunos = arrayAlunos;
 
