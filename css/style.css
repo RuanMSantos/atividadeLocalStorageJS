@@ -30,7 +30,6 @@ body {
     gap: 7px;
     background: transparent;
     backdrop-filter: blur(40px);
-
 }
 
 
@@ -48,26 +47,32 @@ label{
 }
 
 
-form > input {
+#formulario > input {
     border: 1px solid black;
-    border-radius: 50px;
+    border-radius: 25px;
     padding: 10px;
     padding-left: 40px;    
 }
 
-#nome{
+#nome_atualizado{
+    background-image: url(/img/nomeatt.svg);
+    background-repeat: no-repeat;
+    background-position: 10px, center;
+}
+
+#nome, #nome_div{
     background-image: url(/img/user.svg);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
 
-#ano{
+#ano, #ano_div{
     background-image: url(/img/data.svg);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
 
-#curso{
+#curso, #curso_div{
     background-image: url(/img/graduation.svg);
     background-repeat: no-repeat;
     background-position: 10px, center;
@@ -160,7 +165,11 @@ form > h2 {
     border: 1px solid black;
     border-radius: 50px;
     padding: 10px;
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    background-position: 10px, center;
 }
+
 
 #atualizar > #btn{
     justify-content: center;
