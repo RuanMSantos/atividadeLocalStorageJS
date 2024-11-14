@@ -227,3 +227,39 @@ form > h1, #atualizar > h1 {
         font-size: 30px;
     }
 }
+
+@media (max-width: 632px){
+    #formulario {
+        margin-top: 10px;
+    }
+
+    #formulario > i {
+        font-size: 75px;
+    }
+
+    #formulario > h1 {
+        font-size: 55px;
+        margin: 15px;
+    }
+   
+    #formulario > #btn {
+        flex-flow: column;
+    }
+
+    #btn > button {
+        font-size: 30px;
+        padding: 3px;
+    }
+
+    #formulario > input {
+        padding: 15px;
+        padding-left: 50px;
+        background-size: 36px;
+        border-radius: 30px;
+        font-size: 20px;
+    }
+
+    #formulario > label {
+        font-size: 30px;
+    }
+}
