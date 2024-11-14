@@ -84,7 +84,7 @@ form > label {
     font-size: 20px;
 }
 
-form > h2 {
+form > h1, #atualizar > h1 {
     text-align: center;
     font-weight: 500;
 }
@@ -106,6 +106,12 @@ form > h2 {
 
 #btn > :hover {
     background-color: rgb(9, 155, 58);
+}
+
+#formulario > #btn {
+    display: flex;
+    flex-flow: row;
+    gap: 4px;
 }
 
 #result {
@@ -184,4 +190,40 @@ form > h2 {
 
 .erro:focus {
     box-shadow: 0px 0px 0px 3px red;
+}
+
+@media (max-width: 768px){
+    #formulario {
+        margin-top: 4vh;
+    }
+
+    #formulario > i {
+        font-size: 70px;
+    }
+
+    #formulario > h1 {
+        font-size: 50px;
+        margin: 20px;
+    }
+   
+    #formulario > #btn {
+        flex-flow: column;
+    }
+
+    #btn > button {
+        font-size: 30px;
+        padding: 3px;
+    }
+
+    #formulario > input {
+        padding: 15px;
+        padding-left: 50px;
+        background-size: 36px;
+        border-radius: 30px;
+        font-size: 20px;
+    }
+
+    #formulario > label {
+        font-size: 30px;
+    }
 }
