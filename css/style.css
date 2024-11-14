@@ -211,7 +211,7 @@ form > h1, #atualizar > h1 {
         flex-flow: column;
     }
 
-    #btn > button {
+    #formulario > #btn > button {
         font-size: 20px;
         padding: 3px;
     }
@@ -244,6 +244,37 @@ form > h1, #atualizar > h1 {
 
     #result > h1 {
         font-size: 40px;
+    }
+
+    #atualizar {
+        margin: 20px;
+        margin-top: 140px;
+        width: 400px;
+        gap: 2px;
+        padding: 20px 26px;
+    }
+
+    #atualizar > h1 {
+        font-size: 40px;
+        margin: 20px;
+    }
+
+    #atualizar > #btn > button {
+        width: 130px;
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    #atualizar > input {
+        padding: 10px;
+        padding-left: 43px;
+        background-size: 30px;
+        border-radius: 30px;
+        font-size: 15px;
+    }
+
+    #atualizar > label {
+        font-size: 22px;
     }
 }
 /*
