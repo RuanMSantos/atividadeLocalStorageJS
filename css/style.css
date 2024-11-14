@@ -21,7 +21,7 @@ body {
     border: 2px solid  rgba(255, 255, 255, .2);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
     flex-flow: column;
-    margin-top: 15vh;
+    margin-top: 22vh;
     display: flex;
     width:465px;
     gap: 7px;
@@ -52,25 +52,25 @@ label{
 }
 
 #nome_atualizado{
-    background-image: url(/img/nomeatt.svg);
+    background-image: url(/img/nomeatt.png);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
 
 #nome, #nome_div{
-    background-image: url(/img/user.svg);
+    background-image: url(/img/user.png);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
 
 #ano, #ano_div{
-    background-image: url(/img/data.svg);
+    background-image: url(/img/data.png);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
 
 #curso, #curso_div{
-    background-image: url(/img/graduation.svg);
+    background-image: url(/img/graduation.png);
     background-repeat: no-repeat;
     background-position: 10px, center;
 }
@@ -90,12 +90,12 @@ form > h1, #atualizar > h1 {
     color: white;
     border: 1px solid black;
     transition: all 0.5s;
-    border-radius: 10px;
+    border-radius: 20px;
     font-size: 15px;
-    margin-top: 6px;
+    margin-top: 10px;
     padding: 10px;
     cursor: pointer;
-    background-color: gray;
+    background-color: #484dad;
     outline: none;
     border: none;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
